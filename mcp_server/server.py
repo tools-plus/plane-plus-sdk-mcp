@@ -196,7 +196,7 @@ def create_work_item(
     if assignee_ids:
         data["assignees"] = assignee_ids
     if parent_id:
-        data["parent_id"] = parent_id
+        data["parent"] = parent_id
     return _safe(lambda: _get_client().create_work_item(project_id, **data))
 
 
@@ -234,7 +234,7 @@ def update_work_item(
         data["state"] = state_id
     if parent_id is not None:
         # Empty string clears the parent; non-empty sets it.
-        data["parent_id"] = parent_id or None
+        data["parent"] = parent_id or None
     return _safe(lambda: _get_client().update_work_item(project_id, work_item_id, **data))
 
 
