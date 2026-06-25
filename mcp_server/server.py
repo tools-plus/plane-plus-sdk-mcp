@@ -202,8 +202,16 @@ def create_work_item(
 
 @server.tool()
 def retrieve_work_item(project_id: str, work_item_id: str) -> str:
-    """Get work item details."""
+    """Get work item details by project UUID and work item UUID."""
     return _safe(lambda: _get_client().get_work_item(project_id, work_item_id))
+
+
+@server.tool()
+def retrieve_work_item_by_identifier(identifier: str) -> str:
+    """Get a work item by its human-readable identifier (e.g. 'WEB-123' or 'INFRA-42').
+    Resolves the project automatically — no project_id needed.
+    Returns full work item details including project_id for use in subsequent calls."""
+    return _safe(lambda: _get_client().get_work_item_by_identifier(identifier))
 
 
 @server.tool()
